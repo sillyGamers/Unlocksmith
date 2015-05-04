@@ -1,18 +1,18 @@
 package com.kea.sillygamers.unlocksmith;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
 public class SetSkillActivity extends ActionBarActivity {
 
-    public String skillLevelCount = "0";
+    public String skillLevelCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ public class SetSkillActivity extends ActionBarActivity {
 
         TextView skillCounter = (TextView) findViewById(R.id.tvSkillCounter);
         skillCounter.setText(skillLevelCount);
+
     }
 
     @Override
@@ -47,11 +48,17 @@ public class SetSkillActivity extends ActionBarActivity {
 
     public void newSkillLevel(View v){
     try {
+        Intent returnIntent = new Intent();
         EditText newSkillLevel = (EditText) findViewById(R.id.tfNewSkillLevel);
         skillLevelCount = newSkillLevel.getText().toString();
 
         TextView skillCounter = (TextView) findViewById(R.id.tvSkillCounter);
         skillCounter.setText(skillLevelCount);
+
+        returnIntent.putExtra("locksmith", skillLevelCount);
+        setResult(RESULT_OK, returnIntent);
+        finish();
+
     }catch (Exception e){
         e.printStackTrace();
         }

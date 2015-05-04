@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View; //the import for the onClick listeners. allows us to use items on screen
+import android.widget.TextView;
 
+import com.kea.sillygamers.unlocksmith.Model.PlayerCharacter;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    PlayerCharacter thisCharacter = new PlayerCharacter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +46,28 @@ public class MainActivity extends ActionBarActivity {
     }
     public void setSkillLevel (View v)
     {
-        //When clicked brings up add skill activity
-        //if skill has already been set, change text to edit skill
         Intent intent = new Intent(this, SetSkillActivity.class);
-        startActivity(intent);
 
 
 
+        //Passes the players current skill level to the next activity
+        intent.putExtra("Locksmith", thisCharacter.getPlayerLockSmithSkillLevel());
 
+        startActivityForResult(intent, 0);
     }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+            if(resultCode == RESULT_OK){
+
+                TextView tvLevelCounter = (TextView) findViewById(R.id.tvLevelCounter);
+                String newLevel = data.getStringExtra("locksmith");
+
+                tvLevelCounter.setText(newLevel);
+                thisCharacter.setPlayerLockSmithSkillLevel(newLevel);
+            }
+    }//onActivityResult
+
     public void scanQrCode (View v)
     {
         //starts up scanQR code thing
