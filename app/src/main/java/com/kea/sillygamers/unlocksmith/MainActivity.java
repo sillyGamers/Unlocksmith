@@ -19,9 +19,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,8 +46,6 @@ public class MainActivity extends ActionBarActivity {
     {
         Intent intent = new Intent(this, SetSkillActivity.class);
 
-
-
         //Passes the players current skill level to the next activity
         intent.putExtra("Locksmith", thisCharacter.getPlayerLockSmithSkillLevel());
 
@@ -72,5 +68,4 @@ public class MainActivity extends ActionBarActivity {
     {
         //starts up scanQR code thing
     }
-
 }
