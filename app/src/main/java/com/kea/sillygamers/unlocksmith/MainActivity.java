@@ -1,5 +1,7 @@
 package com.kea.sillygamers.unlocksmith;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.view.View; //the import for the onClick listeners. allows us to u
 import android.widget.TextView;
 
 import com.kea.sillygamers.unlocksmith.Model.PlayerCharacter;
+
+import static android.app.PendingIntent.getActivity;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -66,6 +70,35 @@ public class MainActivity extends ActionBarActivity {
 
     public void scanQrCode (View v)
     {
-        //starts up scanQR code thing
+        TextView tvLevelCounter = (TextView) findViewById(R.id.tvLevelCounter);
+        String level = (String) tvLevelCounter.getText();
+        String scanInput = "5";
+
+        if(Validation.checkLock(scanInput, level).equals("not a lock")){
+
+            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
+            aD.setMessage("not a lock");
+            AlertDialog dialog = aD.create();
+            dialog.show();
+        }
+        else if(Validation.checkLock(scanInput, level).equals("door locked")){
+            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
+            aD.setMessage("You may not enter");
+            AlertDialog dialog = aD.create();
+            dialog.show();
+        }
+        else if(Validation.checkLock(scanInput, level).equals("door unlocked")){
+            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
+            aD.setMessage("Please enter");
+            AlertDialog dialog = aD.create();
+            dialog.show();
+
+       }
+        else{
+            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
+            aD.setMessage("Not sure what to do here... god speed my friend");
+            AlertDialog dialog = aD.create();
+            dialog.show();
+        }
     }
 }
