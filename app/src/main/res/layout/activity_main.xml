@@ -15,7 +15,8 @@
         android:layout_alignTop="@+id/tvLevelCounter"
         android:layout_toLeftOf="@+id/tvLevelCounter"
         android:layout_toStartOf="@+id/tvLevelCounter"
-        android:layout_marginRight="15px"/>
+        android:layout_marginRight="15px"
+        android:editable="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +27,8 @@
         android:id="@+id/tvLevelCounter"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:editable="false"/>
 
     <Button
         android:layout_width="wrap_content"
