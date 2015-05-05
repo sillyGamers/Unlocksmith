@@ -1,7 +1,6 @@
 package com.kea.sillygamers.unlocksmith;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,12 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View; //the import for the onClick listeners. allows us to use items on screen
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.kea.sillygamers.unlocksmith.Model.PlayerCharacter;
-
-import static android.app.PendingIntent.getActivity;
 
 
 public class MainActivity extends ActionBarActivity {
