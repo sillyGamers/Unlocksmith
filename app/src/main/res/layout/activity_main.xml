@@ -38,8 +38,9 @@
         android:id="@+id/btnAddSkill"
         android:layout_below="@+id/tvCurrentLevelText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:onClick="setSkillLevel"/>
+        android:layout_marginTop="200dp"
+        android:onClick="setSkillLevel"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,5 +52,19 @@
         android:layout_alignStart="@+id/btnAddSkill"
         android:layout_alignRight="@+id/btnAddSkill"
         android:layout_alignEnd="@+id/btnAddSkill"
-        android:onClick="scanQrCode"/>
+        android:onClick="scanQrCode"
+        android:layout_marginTop="50dp"/>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/tvCurrentLevelText"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:padding="50dp"
+        />
+
+
 </RelativeLayout>
