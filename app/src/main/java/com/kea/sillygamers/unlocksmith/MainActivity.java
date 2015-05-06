@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View; //the import for the onClick listeners. allows us to use items on screen
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -84,31 +85,12 @@ public class MainActivity extends ActionBarActivity {
         String level = (String) tvLevelCounter.getText();
         String scanInput = "5";
 
-        if(Validation.checkLock(scanInput, level).equals("not a lock")){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilder.setView(Validation.checkLock(scanInput, level, MainActivity.this));
 
-            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
-            aD.setMessage("not a lock");
-            AlertDialog dialog = aD.create();
-            dialog.show();
-        }
-        else if(Validation.checkLock(scanInput, level).equals("door locked")){
-            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
-            aD.setMessage("You may not enter");
-            AlertDialog dialog = aD.create();
-            dialog.show();
-        }
-        else if(Validation.checkLock(scanInput, level).equals("door unlocked")){
-            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
-            aD.setMessage("Please enter");
-            AlertDialog dialog = aD.create();
-            dialog.show();
+        AlertDialog dialog = alertDialogBuilder.create();
+        dialog.show();
 
-       }
-        else{
-            AlertDialog.Builder aD = new AlertDialog.Builder(MainActivity.this);
-            aD.setMessage("Not sure what to do here... god speed my friend");
-            AlertDialog dialog = aD.create();
-            dialog.show();
-        }
+
     }
 }

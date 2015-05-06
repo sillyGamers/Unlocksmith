@@ -1,6 +1,6 @@
 package com.kea.sillygamers.unlocksmith;
 
-import android.widget.TextView;
+import android.widget.ImageView;
 
 /**
  * Created by Nicholas on 5/5/2015.
@@ -18,26 +18,32 @@ public class Validation {
         }
         return true;
     }
-    public static String checkLock(String scanInput, String userLevel)
+    public static ImageView checkLock(String scanInput, String userLevel, MainActivity mainActivity)
     {
-        String lock;
+        //Maybe return string array. Position 0 would be message, position 1 would be image location
+        //or return image view
         int userLevelInt = Integer.parseInt(userLevel);
         int scanInputInt = Integer.parseInt(scanInput);
+       ImageView lock = new ImageView(mainActivity);
 
         if(isNumber(scanInput) == false || scanInputInt < 0){
-            return "not a lock";
+            lock.setImageResource(R.drawable.whitelock);
+            return lock;
         }
         else if(scanInputInt > userLevelInt){
-
-            return "door locked";
+            lock.setImageResource(R.drawable.redlock);
+            return lock;
         }
-        else if(scanInputInt < userLevelInt)
+        else if(scanInputInt <= userLevelInt)
         {
-            return "door unlocked";
+            lock.setImageResource(R.drawable.greenlock);
+            return lock;
         }
         else{
-            return "I'm sorry master, I'm not sure what this is";
+            lock.setImageResource(R.drawable.whitelock);
+            return lock;
         }
+
 
     }
 
