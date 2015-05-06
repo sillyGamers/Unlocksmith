@@ -1,6 +1,8 @@
 package com.kea.sillygamers.unlocksmith;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,16 +15,20 @@ import android.widget.TextView;
 public class SetSkillActivity extends ActionBarActivity {
 
     public String skillLevelCount;
+    TextView skillCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_skill);
 
-        TextView skillCounter = (TextView) findViewById(R.id.tvSkillCounter);
-        skillCounter.setText(skillLevelCount);
+        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        skillLevelCount = sharedPreferences.getString("locksmithLevel", "0");
 
+        skillCounter = (TextView) findViewById(R.id.tvSkillCounter);
+        skillCounter.setText(skillLevelCount);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,14 +54,31 @@ public class SetSkillActivity extends ActionBarActivity {
 
     public void newSkillLevel(View v){
     try {
-        Intent returnIntent = new Intent();
+
+
+        /*
+        At first I used to send the informations inputtet via an intent, back to the main activity.
+        But I had some design troubles with initializing storing the data for long term storage.
+        So now I am changing the approach of sending the skill level from activity to activity,
+        I will try to do it with sharedPreferences, and make sure, that the informations is
+        stored and available at all times, even if the app has been closed for a prolonged time.
+         */
+
         EditText newSkillLevel = (EditText) findViewById(R.id.tfNewSkillLevel);
         skillLevelCount = newSkillLevel.getText().toString();
 
         TextView skillCounter = (TextView) findViewById(R.id.tvSkillCounter);
         skillCounter.setText(skillLevelCount);
 
-        returnIntent.putExtra("locksmith", skillLevelCount);
+        //Sets sharedPreferences "MyData" file, finds value "locksmithLevel"
+        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("locksmithLevel", skillLevelCount);
+
+        editor.commit();
+
+        //returnIntent.putExtra("locksmith", skillLevelCount);
+        Intent returnIntent = new Intent();
         setResult(RESULT_OK, returnIntent);
         finish();
 

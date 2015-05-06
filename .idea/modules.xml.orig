@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/UnlockSmith.iml" filepath="$PROJECT_DIR$/UnlockSmith.iml" />
+=======
       <module fileurl="file://$PROJECT_DIR$/Unlocksmith.iml" filepath="$PROJECT_DIR$/Unlocksmith.iml" />
       <module fileurl="file://$PROJECT_DIR$/Unlocksmith.iml" filepath="$PROJECT_DIR$/Unlocksmith.iml" />
+>>>>>>> c5a8ae9f5b9d196f7f45533cc5adcac2c134d506
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
-

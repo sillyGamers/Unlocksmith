@@ -1,8 +1,9 @@
 package com.kea.sillygamers.unlocksmith;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,19 +11,26 @@ import android.view.MenuItem;
 import android.view.View; //the import for the onClick listeners. allows us to use items on screen
 import android.widget.TextView;
 
-import com.kea.sillygamers.unlocksmith.Model.PlayerCharacter;
-
-import static android.app.PendingIntent.getActivity;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    PlayerCharacter thisCharacter = new PlayerCharacter();
+    //PlayerCharacter thisCharacter = new PlayerCharacter();
 
+    TextView locksmithLevel;
+    public String skillLevelCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        locksmithLevel = (TextView) findViewById(R.id.tvLevelCounter);
+
+        //Sets skill level from sharedPreferences
+        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        skillLevelCount = sharedPreferences.getString("locksmithLevel", "0");
+
+        locksmithLevel.setText(skillLevelCount);
     }
 
     @Override
@@ -50,10 +58,10 @@ public class MainActivity extends ActionBarActivity {
     {
         Intent intent = new Intent(this, SetSkillActivity.class);
 
-        //Passes the players current skill level to the next activity
-        intent.putExtra("Locksmith", thisCharacter.getPlayerLockSmithSkillLevel());
-
+        //Activates activity_set_skill, when a result is approved in activity_set_skill
+        //We jump back and run onAtivityResult()
         startActivityForResult(intent, 0);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -61,11 +69,13 @@ public class MainActivity extends ActionBarActivity {
             if(resultCode == RESULT_OK){
 
                 TextView tvLevelCounter = (TextView) findViewById(R.id.tvLevelCounter);
-                String newLevel = data.getStringExtra("locksmith");
 
-                tvLevelCounter.setText(newLevel);
-                thisCharacter.setPlayerLockSmithSkillLevel(newLevel);
+                SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+                skillLevelCount = sharedPreferences.getString("locksmithLevel", "0");
+                locksmithLevel.setText(skillLevelCount);
             }
+
+
     }//onActivityResult
 
     public void scanQrCode (View v)
